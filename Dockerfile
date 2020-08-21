@@ -51,8 +51,8 @@ RUN chown devops:devops /home/devops
 RUN chmod 777 /home/devops
 
 RUN mkdir -p /work
-COPY *.sh /work/scripts/
-RUN dos2unix /work/scripts/*.sh
+#COPY *.sh /work/scripts/
+#RUN dos2unix /work/scripts/*.sh
 RUN chmod 777 /work
 RUN chown -R devops:devops /work
 WORKDIR /work
