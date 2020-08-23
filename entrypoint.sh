@@ -28,4 +28,6 @@ if [ -z "$USER_HOME_COPYSOURCE" ]; then
   chmod -R 700 /home/devops/*.sh
 fi
 
+chown $uid:$gid /work -R
+
 exec /usr/local/bin/gosu $uid:$gid "$@"
