@@ -62,9 +62,6 @@ RUN echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | tee -a /etc/a
 RUN apt-get update
 RUN apt-get install -y kubectl vim nano uuid-runtime
 
-RUN mkdir -p /home/devops/.gnupg
-RUN chown -R devops:devops /home/devops/
-
 # @update: https://github.com/roboll/helmfile/releases
 RUN  curl -fsSL -o helmfile https://github.com/roboll/helmfile/releases/download/v0.125.7/helmfile_linux_amd64 \
   && mv helmfile /bin/helmfile \
