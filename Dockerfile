@@ -5,8 +5,8 @@ ENV TZ=Europe/Berlin
 
 ENV GOPATH /go
 ENV HELM_HOME /helm
-ENV AZURE_CONFIG_DIR=/home/devops/.azure
-ENV HOME=/home/devops
+ENV AZURE_CONFIG_DIR=/root/.azure
+ENV HOME=/root
 
 RUN apt-get update
 
@@ -45,16 +45,16 @@ RUN helm plugin install https://github.com/futuresimple/helm-secrets
 
 RUN ln -sf /bin/bash /bin/sh
 
-RUN mkdir -p /home/devops
-RUN groupadd -r devops && useradd -d /home/devops --no-log-init -g devops devops
-RUN chown devops:devops /home/devops
-RUN chmod 777 /home/devops
+#RUN mkdir -p /home/devops
+#RUN groupadd -r devops && useradd -d /home/devops --no-log-init -g devops devops
+#RUN chown devops:devops /home/devops
+#RUN chmod 777 /home/devops
 
 RUN mkdir -p /work
 #COPY *.sh /work/scripts/
 #RUN dos2unix /work/scripts/*.sh
-RUN chmod 777 /work
-RUN chown -R devops:devops /work
+#RUN chmod 777 /work
+#RUN chown -R devops:devops /work
 WORKDIR /work
 
 RUN curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
@@ -90,10 +90,6 @@ RUN curl -o /usr/local/bin/gosu -SL "https://github.com/tianon/gosu/releases/dow
 COPY entrypoint.sh /work/entrypoint.sh
 RUN chmod +x entrypoint.sh
 
-USER devops
+#USER devops
 
 ENTRYPOINT ["/work/entrypoint.sh"]
-
-# will use gosu for running as a non-root user, so gosu must be started as root
-USER root
-
