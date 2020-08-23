@@ -20,7 +20,7 @@ echo "Starting with user : UID ${uid} - GID ${gid}"
 
 export HOME=/work
 
-if [ $USER_HOME_COPYSOURCE ]; then
+if [ -z "$USER_HOME_COPYSOURCE" ]; then
   echo "copying files from dynamic additional files for homedir to /home/devops"
   cp -H $USER_HOME_COPYSOURCE/* /home/devops/ -R
   chown $uid:$gid /home/devops -R
