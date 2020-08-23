@@ -94,5 +94,6 @@ USER devops
 
 ENTRYPOINT ["/work/entrypoint.sh"]
 
-USER devops
+# will use gosu for running as a non-root user, so gosu must be started as root
+USER root
 
