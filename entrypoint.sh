@@ -20,14 +20,16 @@ echo "Starting with user : UID ${uid} - GID ${gid}"
 
 export HOME=/work
 
-if [ -z "$USER_HOME_COPYSOURCE" ]; then
+if [[ -z "${USER_HOME_COPYSOURCE}" ]]; then
+  echo "USER_HOME_COPYSOURCE is undefined, set this variable to define a different in-container folder source to copy e.g. gpg data from to the user homedir"
+else
   echo "copying files from dynamic additional files for homedir to /home/devops"
-  cp -H $USER_HOME_COPYSOURCE/* /home/devops/ -R
-  chmod -R 600 /home/devops/
-  chmod -R 700 /home/devops/*.sh
+  cp -H $USER_HOME_COPYSOURCE/* /root/ -R
+  chmod -R 744 /root/*.sh
 fi
 
-chown $uid:$gid /home/devops -R
+chown $uid:$gid /root -R
 chown $uid:$gid /work -R
 
-exec /usr/local/bin/gosu $uid:$gid "$@"
+exec "$@"
+#exec /usr/local/bin/gosu $uid:$gid "$@"
