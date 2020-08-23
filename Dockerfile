@@ -79,5 +79,22 @@ RUN  curl -fsSL -o helmfile https://github.com/roboll/helmfile/releases/download
 # required for helmfile and "helm apply" and so on to work
 RUN helm plugin install https://github.com/databus23/helm-diff
 
+ENV USER_HOME_COPYSOURCE=/data/example_home_files
+RUN mkdir -p /data/example_home_files
+COPY README.md /data/example_home_files
+
+RUN curl -o /usr/local/bin/gosu -SL "https://github.com/tianon/gosu/releases/download/1.10/gosu-$(dpkg --print-architecture)" \
+    && curl -o /usr/local/bin/gosu.asc -SL "https://github.com/tianon/gosu/releases/download/1.10/gosu-$(dpkg --print-architecture).asc" \
+    && gpg --verify /usr/local/bin/gosu.asc \
+    && rm /usr/local/bin/gosu.asc \
+    && chmod +x /usr/local/bin/gosu
+
+COPY entrypoint.sh /work/entrypoint.sh
+RUN chmod +x entrypoint.sh
+
+USER devops
+
+ENTRYPOINT ["/work/entrypoint.sh"]
+
 USER devops
 
