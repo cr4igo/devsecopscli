@@ -29,6 +29,16 @@ else
   chmod -R 744 /root/*.sh
 fi
 
+if [ ! -d "/root/.gpgimport" ]; then
+  mkdir /root/.gpgimport
+  echo "empty .gpgimport directory created under /root/.gpgimport"
+fi
+
+echo "import your mounted gpg keys"
+gpg --import /root/.gpgimport/*
+echo "import of gpg keys done"
+
+echo "setting ownage of /root dir to user root"
 chown root:root /root -R
 #chown root:root /work -R
 
