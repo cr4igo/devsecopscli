@@ -24,13 +24,13 @@ if [[ -z "${USER_HOME_COPYSOURCE}" ]]; then
   echo "USER_HOME_COPYSOURCE is undefined, set this variable to define a different in-container folder source to copy e.g. gpg data from to the user homedir"
 else
   echo "copying files from dynamic additional files for homedir to /root"
-  cp -H $USER_HOME_COPYSOURCE/* /root/ -R
+  cp -H $USER_HOME_COPYSOURCE /root/ -R
   chmod -R 744 /root/**/*.sh
   chmod -R 744 /root/*.sh
 fi
 
 chown root:root /root -R
-chown root:root /work -R
+#chown root:root /work -R
 
 exec "$@"
 #exec /usr/local/bin/gosu $uid:$gid "$@"
