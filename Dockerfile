@@ -64,7 +64,7 @@ RUN apt-get install -y kubectl vim nano uuid-runtime
 RUN echo 'source <(kubectl completion bash)' >> ~/.bashrc
 
 # @update: https://github.com/roboll/helmfile/releases
-RUN  curl -fsSL -o helmfile https://github.com/roboll/helmfile/releases/download/v0.125.7/helmfile_linux_amd64 \
+RUN  curl -fsSL -o helmfile https://github.com/roboll/helmfile/releases/download/v0.128.0/helmfile_linux_amd64 \
   && mv helmfile /bin/helmfile \
   && chmod +x /bin/helmfile
 
