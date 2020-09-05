@@ -61,7 +61,7 @@ RUN curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add 
 RUN echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | tee -a /etc/apt/sources.list.d/kubernetes.list
 RUN apt-get update
 RUN apt-get install -y kubectl vim nano uuid-runtime
-RUN echo 'source <(kubectl completion bash)' >> ~/.bashrc
+RUN kubectl completion bash >/etc/bash_completion.d/kubectl
 
 # @update: https://github.com/roboll/helmfile/releases
 RUN  curl -fsSL -o helmfile https://github.com/roboll/helmfile/releases/download/v0.128.0/helmfile_linux_amd64 \
