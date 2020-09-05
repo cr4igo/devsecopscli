@@ -10,7 +10,7 @@ ENV HOME=/root
 
 RUN apt-get update
 
-RUN apt-get --assume-yes install software-properties-common dos2unix curl git jq
+RUN apt-get --assume-yes install software-properties-common dos2unix curl git jq bash-completion
 
 RUN mkdir /helm
 RUN mkdir /helm/plugins
@@ -61,6 +61,7 @@ RUN curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add 
 RUN echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | tee -a /etc/apt/sources.list.d/kubernetes.list
 RUN apt-get update
 RUN apt-get install -y kubectl vim nano uuid-runtime
+RUN echo 'source <(kubectl completion bash)' >> ~/.bashrc
 
 # @update: https://github.com/roboll/helmfile/releases
 RUN  curl -fsSL -o helmfile https://github.com/roboll/helmfile/releases/download/v0.125.7/helmfile_linux_amd64 \
