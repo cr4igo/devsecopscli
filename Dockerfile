@@ -41,8 +41,7 @@ RUN ./get_helm.sh
 RUN curl -fsSL -o helm-secrets.tar.gz https://github.com/jkroepke/helm-secrets/releases/download/v3.7.0/helm-secrets.tar.gz \
     && tar -xvf helm-secrets.tar.gz \
     && helm plugin install helm-secrets \
-    && rm helm-secrets.tar.gz \
-    && rm helm-secrets -R
+    && rm helm-secrets.tar.gz
 
 RUN ln -sf /bin/bash /bin/sh
 
